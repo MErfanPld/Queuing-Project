@@ -1,0 +1,279 @@
+{% load static %}
+{% load acl_tags %}
+
+<div class="page-sidebar">
+  <div class="main-header-left d-none d-lg-block">
+    <p class="mt-4 text-white">
+      پنل کاربری <b>{{ request.user.full_name|default:'---' }}</b>
+    </p>
+  </div>
+  <div class="sidebar custom-scrollbar">
+    <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times" aria-hidden="true"></i></a>
+
+    <ul class="sidebar-menu">
+      <li class="active">
+        <a class="sidebar-header active" href="{% url 'dashboard' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>داشبورد</span>
+        </a>
+      </li>
+
+      <li class="active">
+        <a class="sidebar-header active" href="{% url 'profile' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg><span>پروفایل</span>
+        </a>
+      </li>
+
+      {% if request.user|has_perm:'report_list,report_create,report_edit,report_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="reports.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart">
+              <line x1="12" y1="20" x2="12" y2="10"></line>
+              <line x1="18" y1="20" x2="18" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="16"></line>
+            </svg><span>گزارش ها</span>
+            <i class="fa fa-angle-left  pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+            {% if request.user|has_perm:'transaction_report_list' %}
+            <li>
+                <a href="{% url 'transaction_report' %}">
+                    <i class="fa fa-circle"></i>
+                    <span>تراکنش ها</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% if request.user|has_perm:'withdrawal_report_list' %}
+            <li>
+              <a href="{% url 'withdrawal_report' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>درخواست‌های برداشت کاربر</span>
+              </a>
+          </li>
+          {% endif %}
+        </ul>
+        </li>
+        {% endif %}
+
+        {% if request.user|has_perm:'user_list,user_create,user_edit,user_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>              <span>کاربران</span>
+              <i class="fa fa-angle-left  pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+              <li>
+                  <a href="{% url 'users-list' %}">
+                      <i class="fa fa-circle"></i>
+                      <span>لیست کاربر</span>
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'users-create' %}">
+                    <i class="fa fa-circle"></i>
+                    <span>افزودن کاربر</span>
+                </a>
+            </li>
+
+          {% if request.user|has_perm:'user_permissions_list,user_permissions_create,user_permissions_edit,user_permissions_delete' %}
+
+            <li>
+              <a href="{% url 'permission-user-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست دسترسی</span>
+              </a>
+          </li>
+
+          <li>
+            <a href="{% url 'permission-user-create' %}">
+                <i class="fa fa-circle"></i>
+                <span>افزودن دسترسی</span>
+            </a>
+        </li>
+        {% endif %}
+
+          </ul>
+      </li>
+      {% endif %}
+
+        {% if request.user|has_perm:'employee_list,employee_create,employee_edit,employee_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>              <span>کارمندان</span>
+              <i class="fa fa-angle-left  pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+              <li>
+                  <a href="{% url 'employee-list' %}">
+                      <i class="fa fa-circle"></i>
+                      <span>لیست کارمند ها</span>
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'employee-create' %}">
+                    <i class="fa fa-circle"></i>
+                    <span>افزودن کارمند</span>
+                </a>
+            </li>
+          </ul>
+      </li>
+        {% endif %}
+
+        {% if request.user|has_perm:'employee_list,employee_create,employee_edit,employee_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" y1="8" x2="12" y2="8"></line><line x1="3.95" y1="6.06" x2="8.54" y2="14"></line><line x1="10.88" y1="21.94" x2="15.46" y2="14"></line></svg>              <span>ساعات کاری</span>
+              <i class="fa fa-angle-left  pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+              <li>
+                  <a href="{% url 'employee-list' %}">
+                      <i class="fa fa-circle"></i>
+                      <span>لیست ساعت کاری</span>
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'employee-create' %}">
+                    <i class="fa fa-circle"></i>
+                    <span>افزودن ساعت جدید</span>
+                </a>
+            </li>
+          </ul>
+      </li>
+        {% endif %}
+
+        {% if request.user|has_perm:'service_list,service_create,service_edit,service_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <span>سرویس ها</span>
+              <i class="fa fa-angle-left  pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+              <li>
+                  <a href="{% url 'service-list' %}">
+                      <i class="fa fa-circle"></i>
+                      <span>لیست سرویس</span>
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'service-create' %}">
+                    <i class="fa fa-circle"></i>
+                    <span>افزودن سرویس</span>
+                </a>
+            </li>
+          </ul>
+      </li>
+      {% endif %}
+      {% if request.user|has_perm:'wallet_list,wallet_create,wallet_edit,wallet_delete' %}
+        <li>
+          <a class="sidebar-header" href="javascript:void(0)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+              <span>کیف پول من</span>
+          </a>
+      </li>
+      {% endif %}
+      <li>
+        <a class="sidebar-header" href="{% url 'logout' %}">
+          <i data-feather="log-out"></i>
+          <span>خروج</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="right-sidebar" id="right_side_bar">
+  <div>
+    <div class="container p-0">
+      <div class="modal-header p-l-20 p-r-20">
+        <div class="col-sm-8 p-0">
+          <h6 class="modal-title font-weight-bold">لیست دوستان</h6>
+        </div>
+        <div class="col-sm-4 text-end p-0">
+          <i class="me-2" data-feather="settings"></i>
+        </div>
+      </div>
+    </div>
+    <div class="friend-list-search mt-0">
+      <input type="text" placeholder="جستجوی دوست " />
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="p-l-30 p-r-30 friend-list-name">
+      <div class="chat-box">
+        <div class="people-list friend-list">
+          <ul class="list">
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user.jpg' %}" alt="" />
+              <div class="status-circle online"></div>
+              <div class="about">
+                <div class="name">اریکا هیوز</div>
+                <div class="status">آنلاین</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user1.jpg' %}" alt="" />
+              <div class="status-circle away"></div>
+              <div class="about">
+                <div class="name">اریکا هیوز</div>
+                <div class="status">20 دقیقه قبل</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user2.jpg' %}" alt="" />
+              <div class="status-circle online"></div>
+              <div class="about">
+                <div class="name">اریکا هیوز</div>
+                <div class="status">آنلاین</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user3.jpg' %}" alt="" />
+              <div class="status-circle online"></div>
+              <div class="about">
+                <div class="name">عین چاوز</div>
+                <div class="status">آنلاین</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user3.jpg' %}" alt="" />
+              <div class="status-circle offline"></div>
+              <div class="about">
+                <div class="name">عین چاوز</div>
+                <div class="status">20 دقیقه قبل</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/user5.jpg' %}" alt="" />
+              <div class="status-circle away"></div>
+              <div class="about">
+                <div class="name">عین چاوز</div>
+                <div class="status">20 دقیقه قبل</div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <img class="rounded-circle user-image blur-up lazyloaded" src="{% static 'admin/images/dashboard/designer.jpg' %}" alt="" />
+              <div class="status-circle online"></div>
+              <div class="about">
+                <div class="name">عین چاوز</div>
+                <div class="status">آنلاین</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

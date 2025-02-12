@@ -1,0 +1,86 @@
+{% load static %}
+
+<style>
+    
+    .menu-left {
+        display: flex;
+        align-items: center;
+    }
+    
+    .brand-name {
+        font-size: 20px; /* اندازه متن */
+        font-weight: bold; /* ضخامت متن */
+    }
+</style>
+
+    <!-- header start -->
+    <header class="header-2">
+        <div class="mobile-fix-option"></div>
+        <div class="top-header top-header-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header-contact">
+                            <ul>
+                                <li>خوش آمدید به 
+                                    سامانه مدیریت ارایشگاه</li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i>شماره تماس : 09912146083</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-end">
+                        <ul class="header-dropdown">
+                          {% if request.user.is_authenticated %}
+                          <li class="onhover-dropdown mobile-account">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <a href="{% url 'dashboard' %}">داشبورد</a>
+                          </li>
+                          <li class="onhover-dropdown mobile-account">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <a href="{% url 'logout' %}">خروج</a>
+                          </li>
+                          {% else %}
+                          <li class="onhover-dropdown mobile-account">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            <a href="{% url 'login' %}">ورود</a>
+                          </li>
+                          {% endif %}
+                        </ul>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-menu">
+                        <div class="menu-left">
+
+                            <div class="brand-logo">
+                                {% comment %} <a href="index.html"><img src="{% static 'images/icon/logo/one.webp' %}" class="img-fluid blur-up lazyloaded" alt=""></a> {% endcomment %}
+                            </div>
+                            <span class="brand-name">سامانه مدیریت ارایشگاه</span>
+                        </div>
+                        <div class="menu-right pull-right">
+                            <div>
+                                <nav id="main-nav" class="">
+                                    <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                                    <ul id="main-menu" class="sm pixelstrap sm-horizontal hover-unset" data-smartmenus-id="1738751539433182">
+                                        <li>
+                                            <div class="mobile-back text-start ltr">برگشت<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                                        </li>
+                                        <li><a href="{% url 'home' %}">خانه</a></li>
+                                        <li><a href="{% url 'create_appointment' %}">رزرو</a></li>
+                                        <li><a href="{% url 'working_hours' %}">ساعت کاری</a></li>
+                                        <li><a href="{% url 'home' %}">افتخارات ما</a></li>
+                                        <li><a href="{% url 'home' %}">درباره ما</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->

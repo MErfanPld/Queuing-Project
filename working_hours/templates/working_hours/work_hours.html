@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  ساعت کاری
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    body {
+        direction: rtl;
+    }
+    .working-hours {
+        text-align: center;
+        margin-top: 20px;
+    }
+    table {
+        width: 80%;  /* اضافه کردن فاصله از کناره‌ها */
+        margin: 20px auto;  /* اضافه کردن فاصله از بالا و پایین */
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 15px;
+        text-align: center;
+    }
+    /* تغییر رنگ ردیف‌ها هنگام قرار گرفتن موس روی آنها */
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    .calendar-container {
+        margin-top: 50px;
+    }
+</style>
+
+<div class="title1 section-t-space">
+    <h2 class="title-inner1">ساعات کاری آرایشگاه</h2>
+</div>
+
+<!-- جدول ساعات کاری -->
+<table>
+    <thead>
+        <tr>
+            <th>روز هفته</th>
+            <th>ساعت شروع</th>
+            <th>ساعت پایان</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for working_hour in working_hours %}
+        <tr>
+            <td>{{ working_hour.day }}</td>
+            <td>{{ working_hour.opening_time }}</td>
+            <td>{{ working_hour.closing_time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">هیچ ساعتی ثبت نشده است.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

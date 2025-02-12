@@ -1,0 +1,64 @@
+{% extends 'admin/admin.html' %}
+{% load datetime_filters %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <form class="form-inline search-form search-box">
+                        <div class="form-group">
+                            <input class="form-control-plaintext" type="search" placeholder="جستجو...">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category " id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">شماره</th>
+                                    <th scope="col">نام کاربر</th>
+                                    <th scope="col">سرویس</th>
+                                    <th scope="col">تاریخ</th>
+                                    <th scope="col">زمان</th>
+                                    <th scope="col">وضعیت</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for appointment in appointments %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td class="digits">{{ appointment.user.full_name }} - {{ appointment.user.phone_number }}</td>
+                                    <td class="digits">{{ appointment.service }}</td>
+                                    <td class="digits">{{ appointment.date|jalali_converter_date }}</td>
+                                    <td class="digits">{{ appointment.time|jalali_time }}</td>
+                                    
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                    <td>
+                                        {% if request.user.is_owner %}
+                                        <select name="status" class="form-control digits" data-appointment-id="{{ appointment.id }}">
+                                            <option value="pending" {% if appointment.status == 'pending' %}selected{% endif %}>در انتظار</option>
+                                            <option value="confirmed" {% if appointment.status == 'confirmed' %}selected{% endif %}>تایید شده</option>
+                                            <option value="canceled" {% if appointment.status == 'canceled' %}selected{% endif %}>لغو شده</option>
+                                        </select>
+                                    {% else %}
+                                    <span class="digits">{{ appointment.get_status }}</span>
+                                    {% endif %}
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

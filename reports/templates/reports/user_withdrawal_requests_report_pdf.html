@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>گزارش درخواست‌های برداشت کاربر</title>
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>گزارش درخواست‌های برداشت کاربر</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>کاربر</th>
+                <th>نوبت</th>
+                <th>تاریخ</th>
+                <th>وضعیت</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in user_withdrawal_requests %}
+                <tr>
+                    <td>{{ item.user }}</td>
+                    <td>{{ item.appointment }}</td>
+                    <td>{{ item.date|date:"Y/m/d H:i" }}</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

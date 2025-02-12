@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ایجاد کیف پول</title>
+</head>
+<body>
+    <h1>ایجاد کیف پول</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ایجاد کیف پول</button>
+    </form>
+</body>
+</html>

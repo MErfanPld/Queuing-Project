@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزرو نوبت</title>
+</head>
+<body>
+    <header>
+        <h1>رزرو نوبت</h1>
+        <nav>
+            <ul>
+                <li><a href="">خانه</a></li>
+                <li><a href="{% url 'user_dashboard' %}">داشبورد کاربر</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>فرم نوبت‌دهی</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">رزرو نوبت</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 سیستم نوبت‌دهی</p>
+    </footer>
+</body>
+</html>

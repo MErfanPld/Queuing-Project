@@ -1,0 +1,60 @@
+{% extends 'admin/admin.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <form class="form-inline search-box mb-0">
+                        <div class="form-group me-2">
+                            <select class="form-control" name="date_filter">
+                                <option value="">همه</option>
+                                <option value="today" {% if request.GET.date_filter == "today" %}selected{% endif %}>امروز</option>
+                                <option value="yesterday" {% if request.GET.date_filter == "yesterday" %}selected{% endif %}>دیروز</option>
+                                <option value="past" {% if request.GET.date_filter == "past" %}selected{% endif %}>روزهای قبلی</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">فیلتر</button>
+                    </form>
+
+                    <div class="btn-group">
+                        <a href="{% url 'transaction_report_pdf' %}?date_filter={{ request.GET.date_filter }}&search={{ request.GET.search }}" class="btn btn-primary">دانلود PDF</a>
+                        <a href="{% url 'transaction_report_excel' %}?date_filter={{ request.GET.date_filter }}&search={{ request.GET.search }}" class="btn btn-primary ms-2">دانلود Excel</a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category" id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>کاربر</th>
+                                    <th>مقدار</th>
+                                    <th>تاریخ</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for transaction in transactions %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td data-field="name">{{ transaction.wallet.user | default:'---' }}</td>
+                                        <td data-field="name">{{ transaction.amount | default:'---' }}</td>
+                                        <td data-field="name">{{ transaction.jcreated | default:'---' }}</td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">هیچ تراکنشی یافت نشد.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

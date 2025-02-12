@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  صفحه پرداخت
+{% endblock %}
+
+{% block content %}
+  <div class="title1 section-t-space">
+    <h2 class="title-inner1">پرداخت</h2>
+  </div>
+
+  <section class="theme-invoice-3 section-b-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 m-auto">
+          <div class="invoice-wrapper">
+            <div class="invoice-header">
+              <ul>
+                <li>
+                  <img src="{% static 'images/icon/logo.png' %}" class="img-fluid" alt="logo" />
+                </li>
+                <li>
+                  <h4>لورم ایپسوم متن ساختگی با تولید</h4>
+                </li>
+              </ul>
+            </div>
+            <div class="invoice-body">
+              <div class="top-sec">
+                <div class="row">
+                  <div class="col-lg-8 col-sm-6">
+                    <div class="address-detail">
+                      <h2>جزئیات رزرو</h2>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6 mt-md-0 mt-2">
+                    <ul class="date-detail">
+                      <li>
+                        <span>تاریخ صدور:</span>
+                        <h4>{{ appointment.date }}</h4>
+                      </li>
+                      <li>
+                        <span>شماره فاکتور:</span>
+                        <h4>{{ appointment.id }}</h4>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive-md">
+                <table class="table table-borderless mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">نام سرویس</th>
+                      <th scope="col">قیمت</th>
+                      <th scope="col">تاریخ</th>
+                      <th scope="col">ساعت</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>{{ service.name }}</td>
+                      <td>{{ price }} تومان</td>
+                      <td>{{ appointment.date }}</td>
+                      <td>{{ appointment.time }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot></tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="invoice-footer pt-0">
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" class="btn black-btn btn-solid rounded-2" onclick="window.print();">خروجی pdf</a>
+                </div>
+                <div class="col-6 text-end">
+                  <form method="post" action="{% url 'process_payment' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="appointment_id" value="{{ appointment.id }}" />
+                    <button class="btn btn-sm btn-solid" type="submit">پرداخت</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'admin/admin.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <form class="form-inline search-form search-box">
+                        <div class="form-group">
+                            <input class="form-control-plaintext" type="search" placeholder="جستجو...">
+                        </div>
+                    </form>
+
+                    <a href="{% url 'users-create' %}" class="btn btn-primary mt-md-0 mt-2">درج کاربر جدید</a>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category " id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>نام و نام خانوادگی</th>
+                                    <th>شماره تلفن</th>
+                                    <th>ایمیل</th>
+                                    <th>مالک</th>
+                                    <th>ادمین</th>
+                                    <th>فعال</th>
+                                    <th>کارمند</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in object_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td data-field="name">{{ item.full_name | default:'---' }}</td>
+                                    <td data-field="name">{{ item.get_phone | default:'---' }}</td>
+                                    <td data-field="name">{{ item.email | default:'---' }}</td>
+                                    {% if item.is_owner %}
+                                    <td data-field="name">مالک هست</td>
+                                    {% else %}
+                                    <td data-field="name">---</td>
+                                    {% endif %}
+                                    {% if item.is_superuser %}
+                                    <td data-field="name">مدیر هست</td>
+                                    {% else %}
+                                    <td data-field="name">---</td>
+                                    {% endif %}
+                                    {% if item.is_active %}
+                                    <td data-field="name">فعال</td>
+                                    {% else %}
+                                    <td data-field="name">---</td>
+                                    {% endif %}
+                                    {% if item.is_staff %}
+                                    <td data-field="name">کارمند</td>
+                                    {% else %}
+                                    <td data-field="name">---</td>
+                                    {% endif %}
+
+                                    <td>
+                                        <a href="{% url 'users-update' item.id %}">
+                                            <i class="fa fa-edit" title="ویرایش"></i>
+                                        </a>
+
+                                        <a href="{% url 'users-delete' item.id %}">
+                                            <i class="fa fa-trash" title="حذف"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

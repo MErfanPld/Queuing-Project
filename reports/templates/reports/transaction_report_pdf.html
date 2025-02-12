@@ -1,0 +1,48 @@
+<!-- reports/templates/reports/transaction_report_pdf.html -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>گزارش تراکنش‌ها</title>
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>گزارش تراکنش‌ها</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>کاربر</th>
+                <th>مقدار</th>
+                <th>تاریخ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.wallet.user }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.created_at|date:"Y/m/d H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

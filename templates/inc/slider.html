@@ -1,0 +1,94 @@
+{% load static %}
+
+<style>
+
+    .slider-contain h1,
+    .slider-contain h4 {
+        color: white; /* سفید کردن متن */
+        font-size: 2.5rem; /* اندازه فونت بزرگ‌تر برای تیترها */
+        font-weight: bold; /* ضخیم‌تر کردن متن */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* سایه برای خوانایی بهتر */
+    }
+    
+    .slider-contain h4 {
+        font-size: 1.8rem; /* اندازه کمی کوچک‌تر برای زیرتیتر */
+    }
+    
+    .slider-contain a.btn {
+        background-color: white; /* پس‌زمینه دکمه سفید */
+        color: black; /* متن دکمه مشکی */
+        font-size: 1.2rem; /* اندازه متن */
+        padding: 10px 20px; /* فضای داخلی دکمه */
+        border-radius: 8px; /* گوشه‌های گرد */
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .slider-contain a.btn:hover {
+        background-color: black; /* هنگام هاور مشکی شود */
+        color: white; /* متن سفید شود */
+    }
+    
+    .home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh; /* ارتفاع اسلایدر */
+        padding: 50px 0;
+    }
+    
+
+</style>
+
+
+    <!-- Home slider -->
+    <section class="p-0 gym-slider metro-slider">
+        <div class="slide-1 home-slider slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 6830px; transform: translate3d(1366px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 1366px;"><div><div style="width: 100%; display: inline-block;">
+                <div class="home  text-center bg-size blur-up lazyloaded" style="background-image: url(&quot;{% static 'images/home-banner/border.webp' %}&quot;); background-size: cover; background-position: center center; display: block;">
+                    <img src="{% static 'images/home-banner/border.webp' %}" alt="" class="bg-img blur-up " style="display: none;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h1 style="color:white">به سامانه مدیریت ارایشگاه خوش آمدید </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 1366px;"><div><div style="width: 100%; display: inline-block;">
+                <div class="home text-center bg-size blur-up lazyloaded" style="background-image: url(&quot;{% static 'images/home-banner/border.webp' %}&quot;); background-size: cover; background-position: center center; display: block;">
+                    <img src="{% static 'images/home-banner/border.webp' %}" alt="" class="bg-img blur-up lazyloaded" style="display: none;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        {% comment %} <h1 style="color:white">به سامانه مدیریت ارایشگاه خوش آمدید </h1> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 1366px;"><div><div style="width: 100%; display: inline-block;">
+                <div class="home  text-center bg-size blur-up lazyloaded" style="background-image: url(&quot;{% static 'images/home-banner/53.jpg' %}&quot;); background-size: cover; background-position: center center; display: block;">
+                    <img src="{% static 'images/home-banner/border.webp' %}" alt="" class="bg-img blur-up lazyloaded" style="display: none;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        {% comment %} <h1 style="color:white">به سامانه مدیریت ارایشگاه خوش آمدید </h1> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div></div>
+
+            </div></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
+    </section>
+    <!-- Home slider end -->

@@ -1,0 +1,60 @@
+{% extends 'admin/admin.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <form class="form-inline search-form search-box">
+                        <div class="form-group">
+                            <input class="form-control-plaintext" type="search" placeholder="جستجو...">
+                        </div>
+                    </form>
+
+                    <a href="{% url 'working-hours-create' %}" class="btn btn-primary mt-md-0 mt-2">درج ساعت جدید</a>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category " id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>روز</th>
+                                    <th>ساعات شروع</th>
+                                    <th>ساعات پایان</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in object_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td data-field="name">{{ item.day | default:'---' }}</td>
+                                    <td data-field="name">{{ item.opening_time | default:'---' }}</td>
+                                    <td data-field="name">{{ item.closing_time | default:'---' }}</td>
+
+                                    <td>
+                                        <a href="{% url 'working-hours-update' item.id %}">
+                                            <i class="fa fa-edit" title="ویرایش"></i>
+                                        </a>
+
+                                        <a href="{% url 'working-hours-delete' item.id %}">
+                                            <i class="fa fa-trash" title="حذف"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
