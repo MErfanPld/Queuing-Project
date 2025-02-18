@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  پکیچ ها
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="title1 section-t-space">
+    <h2 class="title-inner1">پکیچ ها</h2>
+  </div>
+
+  <section class="pt-0 ratio_asos section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="theme-tab">
+                    <div class="tab-content-cls">
+                        <div id="tab-4" class="tab-content active default" style="display: block;">
+                            <div class="no-slider row">
+                                {% for package in packages %}
+                                <div class="product-box">
+                                    <div class="img-wrapper">
+                                        <div class="front">
+                                            <a href="{% url 'packages:package_detail' package.id %}" class="bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ package.image.url }}&quot;); background-size: cover; background-position: center center; display: block;"><img src="{{ package.image.url }}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-detail">
+                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                        <a href="{% url 'packages:package_detail' package.id %}">
+                                            <h6>{{ package.name }} | {{ package.business }}</h6>
+                                        </a>
+                                        <h4>{{ package.total_price }} تومان</h4>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3">هیچ پکیچی ثبت نشده است.</td>
+                                </tr>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

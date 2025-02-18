@@ -31,6 +31,7 @@ urlpatterns = [
     path('payments/', include('payments.urls')),
     path('reports/', include('reports.urls')),
     path('working_hours/', include('working_hours.urls')),
+    path('packages/', include('packages.urls')),
 ]
 
 if settings.DEBUG:

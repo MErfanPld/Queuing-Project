@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'payments',
     'reports',
     'working_hours',
+    'packages',
 ]
 
 MIDDLEWARE = [
