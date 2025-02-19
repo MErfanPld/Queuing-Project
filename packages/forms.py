@@ -11,4 +11,5 @@ class PackageForm(forms.ModelForm):
 
     class Meta:
         model = Package
-        fields = ['business', 'name', 'services']
+        fields = ['business', 'name', 'services', 'desc',
+                  'total_price', 'image', 'media_files']
