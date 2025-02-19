@@ -1,0 +1,54 @@
+{% extends 'admin/admin.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mt-md-0 mt-2">لیست نظرات</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category " id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>پکیج</th>
+                                    <th>کاربر</th>
+                                    <th>امتیاز</th>
+                                    <th>نظر</th>
+                                    <th>تاریخ ثبت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in object_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td data-field="name">{{ item.package | default:'---' }}</td>
+                                    <td data-field="name">{{ item.user | default:'---' }}</td>
+                                    <td data-field="name">{{ item.rating | default:'---' }} </td>
+                                    <td data-field="name">{{ item.comment | default:'---' }} </td>
+                                    <td data-field="name">{{ item.created_at | default:'---' }} </td>
+
+                                    <td>
+                                        <a href="{% url 'packages:package-delete-review' item.id %}">
+                                            <i class="fa fa-trash" title="حذف"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

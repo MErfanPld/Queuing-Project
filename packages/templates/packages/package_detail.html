@@ -40,14 +40,14 @@
                       <div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 95px;">
                         <div>
                           <div style="width: 100%; display: inline-block;">
-                            <img src="../assets/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyloaded" />
+                            <img src="{{ package.image.url }}" alt="" class="img-fluid blur-up lazyloaded" />
                           </div>
                         </div>
                       </div>
                       <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 95px;">
                         <div>
                           <div style="width: 100%; display: inline-block;">
-                            <img src="../assets/images/pro3/2.jpg" alt="" class="img-fluid blur-up lazyloaded" />
+                            <img src="{{ package.image.url }}" alt="" class="img-fluid blur-up lazyloaded" />
                           </div>
                         </div>
                       </div>
@@ -68,14 +68,14 @@
                       <div class="slick-slide slick-cloned" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 95px;">
                         <div>
                           <div style="width: 100%; display: inline-block;">
-                            <img src="../assets/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyloaded" />
+                            <img src="{{ package.image.url }}" alt="" class="img-fluid blur-up lazyloaded" />
                           </div>
                         </div>
                       </div>
                       <div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 95px;">
                         <div>
                           <div style="width: 100%; display: inline-block;">
-                            <img src="../assets/images/pro3/2.jpg" alt="" class="img-fluid blur-up lazyloaded" />
+                            <img src="{{ package.image.url }}" alt="" class="img-fluid blur-up lazyloaded" />
                           </div>
                         </div>
                       </div>
@@ -135,6 +135,7 @@
               </div>
             </div>
           </div>
+          <div class="col-lg-2"></div>
           <div class="col-lg-4 text-left">
             <div class="product-right product-form-box">
               {% comment %} <h4><del>1459.00</del><span>تخفیف</span></h4> {% endcomment %}
@@ -165,6 +166,10 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>ویدیو</a>
+              <div class="material-border"></div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab" aria-selected="true"><i class="icofont icofont-contacts"></i>نظر بنویسید</a>
               <div class="material-border"></div>
             </li>
             <li class="nav-item">
@@ -206,6 +211,31 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+              {% for review in reviews %}
+                <div>
+                  <p>
+                    <strong>{{ review.user }}</strong> - امتیاز: {{ review.rating }} ⭐
+                  </p>
+                  <p>{{ review.comment }}</p>
+                  <hr />
+                </div>
+              {% empty %}
+                <p>هنوز نظری ثبت نشده است.</p>
+              {% endfor %}
+              <form class="theme-form" method="post">
+                <div class="form-row row">
+                  <div class="col-md-6">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                  </div>
+                  <div class="col-md-12">
+                    <button class="btn btn-solid" type="submit">نظر خود را ارسال کنید</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

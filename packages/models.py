@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from decimal import Decimal
 from business.models import Service, Business
@@ -13,7 +14,8 @@ class Package(models.Model):
     total_price = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, verbose_name="قیمت کل")
     image = models.ImageField(verbose_name="تصویر", null=True, blank=True)
-    media_files = models.FileField(default=list, blank=True, verbose_name="تصاویر و ویدیوها")
+    media_files = models.FileField(
+        default=list, blank=True, verbose_name="تصاویر و ویدیوها")
 
     class Meta:
         verbose_name = "پکیج"
@@ -29,7 +31,29 @@ class Package(models.Model):
 
     def save(self, *args, **kwargs):
         """ابتدا شیء را ذخیره کرده و سپس مقدار `total_price` را محاسبه و ذخیره می‌کنیم"""
-        super().save(*args, **kwargs)  # ابتدا شیء ذخیره شود تا ID داشته باشد
+        super().save(*args, **kwargs)
         self.total_price = self.calculate_total_price()
-        # مجدداً ذخیره کنیم اما فقط فیلد قیمت را آپدیت کنیم
         super().save(update_fields=['total_price'])
+
+    def average_rating(self):
+        """محاسبه میانگین امتیاز نظرات این پکیج"""
+        return self.reviews.aggregate(avg_rating=Avg('rating'))['avg_rating'] or 0
+
+
+class PackageReview(models.Model):
+    package = models.ForeignKey(
+        'Package', on_delete=models.CASCADE, related_name='reviews', verbose_name="پکیج")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='package_reviews', verbose_name="کاربر")
+    rating = models.PositiveSmallIntegerField(verbose_name="امتیاز", default=1)
+    comment = models.TextField(verbose_name="نظر", blank=True, null=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="تاریخ ثبت")
+
+    class Meta:
+        verbose_name = "نظر پکیج"
+        verbose_name_plural = "نظرات پکیج"
+        unique_together = ('package', 'user')
+
+    def __str__(self):
+        return f"{self.user} - {self.package} ({self.rating} ستاره)"
