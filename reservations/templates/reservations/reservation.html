@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'kamadatepicker.min.css' %}">
+<script src="{% static 'kamadatepicker.min.js' %}"></script>
+
+
 <div class="title1 section-t-space">
     <h2 class="title-inner1">ثبت رزرو</h2>
 </div>
@@ -21,8 +27,10 @@
 
                         <!-- Date Selection -->
                         <div class="col-sm-6">
-                            {{ form.date|as_crispy_field }}
-                        </div>
+                            <div class="datepicker-wrapper">
+                                {{ form.date|as_crispy_field }}
+                            </div>
+                        </div>                        
 
                         <!-- Time Selection -->
                         <div class="col-sm-6">
@@ -42,23 +50,23 @@
 </section>
 {% endblock %}
 
-<!-- JavaScript for Persian Date and Time Picker -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/js/persian-datepicker.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/persian-timepicker@latest/dist/js/persian-timepicker.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Initialize Persian Date Picker
-        $('#id_date').persianDatepicker({
-            format: 'YYYY/MM/DD',
-            calendarType: 'persian',
-            locale: 'fa'
-        });
-
-        // Initialize Persian Time Picker
-        $('#id_time').persianTimepicker({
-            format: 'HH:mm',
-            showMeridian: false
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            if (document.querySelector('.datepicker')) {
+                kamaDatepicker('.datepicker', {
+                    placeholder: "تاریخ را انتخاب کنید",
+                    nextButtonIcon: "fa fa-arrow-circle-right",
+                    previousButtonIcon: "fa fa-arrow-circle-left",
+                    forceFarsiDigits: true,
+                    markToday: true,
+                    highlightSelectedDay: true,
+                    gotoToday: true,
+                    swapNextPrev: true,
+                });
+            } else {
+                console.error("datepicker element not found!");
+            }
+        }, 500);
     });
 </script>

@@ -16,7 +16,7 @@ class WorkingHoursListView(ListView):
 
 #? ============================= WorkingHours CRUD =============================
 class WorkingHoursListViewAdmin(PermissionMixin, ListView):
-    permissions = ['WorkingHours_list']
+    permissions = ['working_hours_list']
     model = WorkingHours
     context_object_name = 'WorkingHours_list'
     template_name = 'working_hours/work_hours_list.html'
@@ -31,7 +31,7 @@ class WorkingHoursListViewAdmin(PermissionMixin, ListView):
 
 
 class WorkingHoursCreateViewAdmin(PermissionMixin, CreateView):
-    permissions = ['WorkingHours_create']
+    permissions = ['working_hours_create']
     template_name = 'working_hours/work_hours_form.html'
     model = WorkingHours
     form_class = WorkingHoursForm
@@ -39,7 +39,7 @@ class WorkingHoursCreateViewAdmin(PermissionMixin, CreateView):
 
 
 class WorkingHoursUpdateViewAdmin(PermissionMixin, UpdateView):
-    permissions = ['WorkingHours_list_edit']
+    permissions = ['working_hours_edit']
     template_name = 'working_hours/work_hours_form.html'
     model = WorkingHours
     form_class = WorkingHoursForm
@@ -47,7 +47,7 @@ class WorkingHoursUpdateViewAdmin(PermissionMixin, UpdateView):
 
 
 class WorkingHoursDeleteViewAdmin(PermissionMixin, DeleteView):
-    permissions = ['WorkingHours_list_delete']
+    permissions = ['working_hours_delete']
     model = WorkingHours
     template_name = 'working_hours/confirm_work_hours_delete.html'
     success_url = reverse_lazy("working-hours-list")

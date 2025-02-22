@@ -137,6 +137,39 @@ PERMISSIONS.append(SERVICE_PERMISSIONS)
 
 
 ######################################################################
+WORKINGHOURS_PERMISSIONS = {
+    'title': 'دسترسی ساعت کاری ها',
+    'permissions': [
+        {'name': 'لیست ساعت کاری ها', 'code': 'working_hours_list',
+            'description': 'دسترسی لیست ساعت کاری ها'},
+        {'name': 'افزودن ساعت کاری ها', 'code': 'working_hours_create',
+         'description': 'دسترسی ساخت ساعت کاری ها جدید'},
+        {'name': 'ویرایش ساعت کاری ها', 'code': 'working_hours_edit',
+            'description': 'دسترسی ویرایش ساعت کاری ها'},
+        {'name': 'حذف ساعت کاری ها', 'code': 'working_hours_delete',
+            'description': 'دسترسی حذف ساعت کاری ها'},
+    ]
+}
+PERMISSIONS.append(WORKINGHOURS_PERMISSIONS)
+
+
+######################################################################
+PACKAGE_PERMISSIONS = {
+    'title': 'دسترسی پکیچ ها',
+    'permissions': [
+        {'name': 'لیست پکیچ ها', 'code': 'packages_list',
+            'description': 'دسترسی لیست پکیچ ها'},
+        {'name': 'افزودن پکیچ ها', 'code': 'packages_create',
+         'description': 'دسترسی ساخت پکیچ ها جدید'},
+        {'name': 'ویرایش پکیچ ها', 'code': 'packages_edit',
+            'description': 'دسترسی ویرایش پکیچ ها'},
+        {'name': 'حذف پکیچ ها', 'code': 'packages_delete',
+            'description': 'دسترسی حذف پکیچ ها'},
+    ]
+}
+PERMISSIONS.append(PACKAGE_PERMISSIONS)
+
+######################################################################
 
 USER_PERMISSIONS_PERMISSIONS = {
     'title': 'دسترسی دسترسی کاربر ها',
