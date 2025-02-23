@@ -51,6 +51,9 @@ class UserPermissionForm(forms.ModelForm):
             self.fields['user'].queryset = User.objects.filter(user_permission__isnull=True)
 
     def clean_permissions(self):
+        print('ffffffffffffffff')
+        print(self.cleaned_data.get('permissions'))
+
         if self.cleaned_data.get('permissions'):
             permissions = self.cleaned_data.get('permissions').split(',')
         else:
