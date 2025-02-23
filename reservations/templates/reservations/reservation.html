@@ -1,72 +1,69 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  ثبت رزرو
+    ثبت رزرو
 {% endblock %}
 
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'kamadatepicker.min.css' %}">
-<script src="{% static 'kamadatepicker.min.js' %}"></script>
+    <div class="title1 section-t-space">
+        <h2 class="title-inner1">ثبت رزرو</h2>
+    </div>
+    <section class="section-b-space pt-0 ratio_asos">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="theme-form" method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-row row">
+                            <!-- Service Selection -->
+                            <div class="col-sm-6">{{ form.service|as_crispy_field }}</div>
 
-
-<div class="title1 section-t-space">
-    <h2 class="title-inner1">ثبت رزرو</h2>
-</div>
-<section class="section-b-space pt-0 ratio_asos">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <form class="theme-form" method="post" action="">
-                    {% csrf_token %}
-                    <div class="form-row row">
-                        <!-- Service Selection -->
-                        <div class="col-sm-6">{{ form.service|as_crispy_field }}</div>
-
-                        <!-- Date Selection -->
-                        <div class="col-sm-6">
-                            <div class="datepicker-wrapper">
-                                {{ form.date|as_crispy_field }}
+                            <!-- Date Selection -->
+                            <div class="col-sm-6">
+                                <div class="datepicker-wrapper">
+                                    {{ form.date|as_crispy_field }}
+                                </div>
                             </div>
-                        </div>                        
 
-                        <!-- Time Selection -->
-                        <div class="col-sm-6">
-                            {{ form.time|as_crispy_field }}
-                        </div>
+                            <!-- Time Selection -->
+                            <div class="col-sm-6">
+                                {{ form.time|as_crispy_field }}
+                            </div>
 
-                        <!-- Submit Button -->
-                        <div class="col-md-12">
-                            <input type="hidden" name="service_id" value="{{ service.id }}">
-                            <button class="btn btn-sm btn-solid" type="submit">ارسال رزرو</button>
+                            <!-- Submit Button -->
+                            <div class="col-md-12">
+                                <input type="hidden" name="service_id" value="{{ service.id }}">
+                                <button class="btn btn-sm btn-solid" type="submit">ارسال رزرو</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-            if (document.querySelector('.datepicker')) {
-                kamaDatepicker('.datepicker', {
-                    placeholder: "تاریخ را انتخاب کنید",
-                    nextButtonIcon: "fa fa-arrow-circle-right",
-                    previousButtonIcon: "fa fa-arrow-circle-left",
-                    forceFarsiDigits: true,
-                    markToday: true,
-                    highlightSelectedDay: true,
-                    gotoToday: true,
-                    swapNextPrev: true,
-                });
-            } else {
-                console.error("datepicker element not found!");
-            }
-        }, 500);
+{% block js %}
+    <script>
+    kamaDatepicker('id_date', {
+        placeholder: "تاریخ را انتخاب کنید"
+        , nextButtonIcon: "fa fa-arrow-circle-right"
+        , previousButtonIcon: "fa fa-arrow-circle-left"
+        , buttonsColor: "orange"
+        , markToday: true
+        , markHolidays: true
+        , highlightSelectedDay: true
+        , sync: true
+        , gotoToday: true
+    });
+
+    $("#id_date").attr('autocomplete', 'off');
+
+    $('#id_date').on('change', function () {
+        $('#id_date').val($('#id_date').val().replaceAll('/', '-'))
     });
 </script>
+{% endblock %}

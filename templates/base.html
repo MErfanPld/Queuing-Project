@@ -35,6 +35,8 @@
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
+    <link rel="stylesheet" href="{% static 'kamadatepicker.min.css' %}">
+
 </head>
 
 <body class="theme-color-5 rtl">
@@ -236,6 +238,8 @@
     <script src="{% static 'js/theme-setting.js'%}"></script>
     <script src="{% static 'js/script.js'%}"></script>
 
+    <script src="{% static 'kamadatepicker.min.js' %}"></script>
+
     <script>
        $( window ).on('load', function () {
             setTimeout(function () {
@@ -251,6 +255,9 @@
             document.getElementById("search-overlay").style.display = "none";
         }
     </script>
+
+    {% block js %}{% endblock %}
+
 </body>
 
 </html>
