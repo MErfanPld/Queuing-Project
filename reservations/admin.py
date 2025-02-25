@@ -4,4 +4,4 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Appointment)
-admin.site.register(Schedule)
+admin.site.register(AvailableTimeSlot)

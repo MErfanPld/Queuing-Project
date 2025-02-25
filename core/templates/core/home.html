@@ -322,10 +322,27 @@
   </div>
 </section>
 
+{% endblock %}
 
 
+{% block js %}
+    <script>
+    kamaDatepicker('id_date', {
+        placeholder: "تاریخ را انتخاب کنید"
+        , nextButtonIcon: "fa fa-arrow-circle-right"
+        , previousButtonIcon: "fa fa-arrow-circle-left"
+        , buttonsColor: "orange"
+        , markToday: true
+        , markHolidays: true
+        , highlightSelectedDay: true
+        , sync: true
+        , gotoToday: true
+    });
 
+    $("#id_date").attr('autocomplete', 'off');
 
-
-
+    $('#id_date').on('change', function () {
+        $('#id_date').val($('#id_date').val().replaceAll('/', '-'))
+    });
+</script>
 {% endblock %}

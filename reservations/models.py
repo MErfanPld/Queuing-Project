@@ -35,24 +35,19 @@ class Appointment(models.Model):
         return dict(self.STATUS_CHOICES).get(self.status, '')
 
 
-class Schedule(models.Model):
-    business = models.ForeignKey(
-        Business, on_delete=models.CASCADE, related_name='schedules', verbose_name="کسب‌وکار")
-    day_of_week = models.CharField(max_length=10, choices=[
-        ('Monday', 'دوشنبه'),
-        ('Tuesday', 'سه‌شنبه'),
-        ('Wednesday', 'چهارشنبه'),
-        ('Thursday', 'پنج‌شنبه'),
-        ('Friday', 'جمعه'),
-        ('Saturday', 'شنبه'),
-        ('Sunday', 'یکشنبه'),
-    ], verbose_name="روز هفته")
-    start_time = models.TimeField(verbose_name="زمان شروع")
-    end_time = models.TimeField(verbose_name="زمان پایان")
+class AvailableTimeSlot(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="time_slots", verbose_name="سرویس")
+    date = models.DateField(verbose_name="تاریخ")
+    time = models.TimeField(verbose_name="ساعت در دسترس")
+    is_booked = models.BooleanField(default=False, verbose_name="رزرو شده")
 
     class Meta:
-        verbose_name = "زمانبندی"
-        verbose_name_plural = "زمانبندی‌ها"
+        unique_together = ('service', 'date', 'time')
+        verbose_name = "ساعت در دسترس"
+        verbose_name_plural = "ساعت‌های در دسترس"
 
     def __str__(self):
-        return f"{self.business.name} - {self.day_of_week}: {self.start_time} تا {self.end_time}"
+        return f"{self.service.name} | {self.date} - {self.time}"
+
+    def jdate(self):
+        return jalali_converter(self.date)
