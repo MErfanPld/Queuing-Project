@@ -198,6 +198,21 @@
                     <span>افزودن سرویس</span>
                 </a>
             </li>
+
+            <li>
+              <a href="{% url 'get-available-admin-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست ساعت‌های در دسترس</span>
+              </a>
+          </li>
+
+          <li>
+            <a href="{% url 'get-available-admin-create' %}">
+                <i class="fa fa-circle"></i>
+                <span>افزودن ساعت‌های در دسترس</span>
+            </a>
+        </li>
+
           </ul>
       </li>
       {% endif %}
