@@ -1,0 +1,29 @@
+{% extends 'admin/admin.html' %}
+
+{% block title %}
+  تأیید حذف
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">تأیید حذف
+        </h4>
+        </div>
+        <div class="card-body">
+            <p>آیا مطمئن هستید که می‌خواهید این کسب و کار را حذف کنید؟</p>
+            <div class="bootstrap-modal">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">حذف</button>
+                    <a href="{% url 'business-list' %}" class="btn btn-secondary">لغو</a>
+                  </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

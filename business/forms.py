@@ -5,7 +5,7 @@ from .models import Business, Service, Employee
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['name', 'business_type', 'address', 'phone_number']
+        fields = "__all__"
 
 
 class ServiceForm(forms.ModelForm):

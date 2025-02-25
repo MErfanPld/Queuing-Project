@@ -117,3 +117,37 @@ class EmployeeDeleteView(PermissionMixin, DeleteView):
     model = Employee
     template_name = 'business/admin/employee/confirm_employee_delete.html'
     success_url = reverse_lazy("employee-list")
+
+#? ============================= Business CRUD =============================
+class BusinessListView(PermissionMixin, ListView):
+    permissions = ['business_list']
+    model = Business
+    context_object_name = 'business_list'
+    template_name = 'business/admin/business/business_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        return context
+
+
+class BusinessCreateView(PermissionMixin, CreateView):
+    permissions = ['business_create']
+    template_name = "business/admin/business/business_form.html"
+    model = Business
+    form_class = BusinessForm
+    success_url = reverse_lazy("business-list")
+
+
+class BusinessUpdateView(PermissionMixin, UpdateView):
+    permissions = ['business_edit']
+    template_name = "business/admin/business/business_form.html"
+    model = Business
+    form_class = BusinessForm
+    success_url = reverse_lazy("business-list")
+
+
+class BusinessDeleteView(PermissionMixin, DeleteView):
+    permissions = ['business_delete']
+    model = Business
+    template_name = 'business/admin/business/confirm_business_delete.html'
+    success_url = reverse_lazy("business-list")

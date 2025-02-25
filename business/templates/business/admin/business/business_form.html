@@ -1,0 +1,90 @@
+{% extends 'admin/admin.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}
+        ویرایش کسب و کار
+    {% else %}
+        افزودن کسب و کار
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="page-header-left">
+                            <h3>{% if object %}ویرایش کسب و کار{% else %}افزودن کسب و کار جدید{% endif %}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card tab2-card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist">
+                                <li class="nav-item"><a class="nav-link active show" id="account-tab"
+                                                        data-bs-toggle="tab" href="#account" role="tab"
+                                                        aria-controls="account" aria-selected="true"
+                                                        data-original-title="" title="">کسب و کار</a></li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="account" role="tabpanel"
+                                     aria-labelledby="account-tab">
+                                    <form id="frm" class="needs-validation user-add" method="post">
+                                        {% csrf_token %}
+                                        <h4>{% if object %}ویرایش کسب و کار{% else %}افزودن کسب و کار جدید{% endif %}</h4>
+
+                                        <div class="form-group">
+                                            {{ form.name|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.owner|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.business_type|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.address|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.telephone_number|as_crispy_field }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form.phone_number|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.instagram_link|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.is_parking|as_crispy_field }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form.is_coffee_shop|as_crispy_field }}
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button onclick="$('#frm').submit()" type="button" class="btn btn-primary">ذخیره
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

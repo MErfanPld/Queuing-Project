@@ -1,0 +1,60 @@
+{% extends 'admin/admin.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <form class="form-inline search-form search-box">
+                        <div class="form-group">
+                            <input class="form-control-plaintext" type="search" placeholder="جستجو...">
+                        </div>
+                    </form>
+
+                    <a href="{% url 'business-create' %}" class="btn btn-primary mt-md-0 mt-2">درج کسب و کار جدید</a>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="table list-digital all-package table-category " id="editableTable">
+                            <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>نام کسب‌وکار</th>
+                                    <th>نوع کسب‌وکار</th>
+                                    <th>شماره تلفن</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in object_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td data-field="name">{{ item.name | default:'---' }}</td>
+                                    <td data-field="name">{{ item.business_type | default:'---' }}</td>
+                                    <td data-field="name">{{ item.telephone_number | default:'---' }}</td>
+
+                                    <td>
+                                        <a href="{% url 'business-update' item.id %}">
+                                            <i class="fa fa-edit" title="ویرایش"></i>
+                                        </a>
+
+                                        <a href="{% url 'business-delete' item.id %}">
+                                            <i class="fa fa-trash" title="حذف"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

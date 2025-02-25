@@ -7,7 +7,8 @@ from decimal import Decimal
 
 class Business(models.Model):
     BUSINESS_TYPES = [
-        ('salon', 'آرایشگاه'),
+        ('آرایشگاه', 'آرایشگاه'),
+        ('مراکز پوست', 'مراکز پوست'),
         # ('restaurant', 'رستوران'),
         # ('clinic', 'مطب'),
         # ('immigration_office', 'دفتر مهاجرت'),

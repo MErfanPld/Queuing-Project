@@ -181,23 +181,36 @@
         <li class="active">
           <a class="sidebar-header active" href="javascript:void(0)">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-              <span>سرویس ها</span>
+              <span>مجموعه</span>
               <i class="fa fa-angle-left  pull-right"></i>
           </a>
 
           <ul class="sidebar-submenu">
               <li>
-                  <a href="{% url 'service-list' %}">
+                  <a href="{% url 'business-list' %}">
                       <i class="fa fa-circle"></i>
-                      <span>لیست سرویس</span>
+                      <span>لیست کسب و کار</span>
                   </a>
               </li>
               <li>
-                <a href="{% url 'service-create' %}">
+                <a href="{% url 'business-create' %}">
                     <i class="fa fa-circle"></i>
-                    <span>افزودن سرویس</span>
+                    <span>افزودن کسب و کار</span>
                 </a>
             </li>
+
+            <li>
+              <a href="{% url 'service-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست سرویس</span>
+              </a>
+          </li>
+          <li>
+            <a href="{% url 'service-create' %}">
+                <i class="fa fa-circle"></i>
+                <span>افزودن سرویس</span>
+            </a>
+        </li>
 
             <li>
               <a href="{% url 'get-available-admin-list' %}">
