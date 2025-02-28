@@ -38,204 +38,253 @@
               <line x1="18" y1="20" x2="18" y2="4"></line>
               <line x1="6" y1="20" x2="6" y2="16"></line>
             </svg><span>گزارش ها</span>
-            <i class="fa fa-angle-left  pull-right"></i>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
 
           <ul class="sidebar-submenu">
             {% if request.user|has_perm:'transaction_report_list' %}
-            <li>
+              <li>
                 <a href="{% url 'transaction_report' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>تراکنش ها</span>
+                  <i class="fa fa-circle"></i>
+                  <span>تراکنش ها</span>
                 </a>
-            </li>
+              </li>
             {% endif %}
 
             {% if request.user|has_perm:'withdrawal_report_list' %}
-            <li>
-              <a href="{% url 'withdrawal_report' %}">
+              <li>
+                <a href="{% url 'withdrawal_report' %}">
                   <i class="fa fa-circle"></i>
                   <span>درخواست‌های برداشت کاربر</span>
-              </a>
-          </li>
-          {% endif %}
-        </ul>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
         </li>
-        {% endif %}
+      {% endif %}
 
-        {% if request.user|has_perm:'user_list,user_create,user_edit,user_delete' %}
+      {% if request.user|has_perm:'user_list,user_create,user_edit,user_delete' %}
         <li class="active">
           <a class="sidebar-header active" href="javascript:void(0)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>              <span>کاربران</span>
-              <i class="fa fa-angle-left  pull-right"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg> <span>کاربران</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
 
           <ul class="sidebar-submenu">
-              <li>
-                  <a href="{% url 'users-list' %}">
-                      <i class="fa fa-circle"></i>
-                      <span>لیست کاربر</span>
-                  </a>
-              </li>
-              <li>
-                <a href="{% url 'users-create' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>افزودن کاربر</span>
-                </a>
+            <li>
+              <a href="{% url 'users-list' %}">
+                <i class="fa fa-circle"></i>
+                <span>لیست کاربر</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'users-create' %}">
+                <i class="fa fa-circle"></i>
+                <span>افزودن کاربر</span>
+              </a>
             </li>
 
-          {% if request.user|has_perm:'user_permissions_list,user_permissions_create,user_permissions_edit,user_permissions_delete' %}
-
-            <li>
-              <a href="{% url 'permission-user-list' %}">
+            {% if request.user|has_perm:'user_permissions_list,user_permissions_create,user_permissions_edit,user_permissions_delete' %}
+              <li>
+                <a href="{% url 'permission-user-list' %}">
                   <i class="fa fa-circle"></i>
                   <span>لیست دسترسی</span>
-              </a>
-          </li>
+                </a>
+              </li>
 
-          <li>
-            <a href="{% url 'permission-user-create' %}">
-                <i class="fa fa-circle"></i>
-                <span>افزودن دسترسی</span>
-            </a>
-        </li>
-        {% endif %}
-
+              <li>
+                <a href="{% url 'permission-user-create' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن دسترسی</span>
+                </a>
+              </li>
+            {% endif %}
           </ul>
-      </li>
+        </li>
+      {% endif %}
+
+      {% if request.user|has_perm:'packages_list,packages_create,packages_edit,packages_delete' %}
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+            </svg> <span>پکیچ ها</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+
+          <ul class="sidebar-submenu">
+            {% if request.user|has_perm:'packages_list' %}
+              <li>
+                <a href="{% url 'packages:package-admin-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست پکیچ ها</span>
+                </a>
+              </li>
+            {% endif %}
+            {% if request.user|has_perm:'packages_create,packages_edit,packages_delete' %}
+              <li>
+                <a href="{% url 'packages:package-create' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن پکیچ</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
       {% endif %}
 
       {% if request.user|has_perm:'employee_list,employee_create,employee_edit,employee_delete' %}
-      <li class="active">
-        <a class="sidebar-header active" href="javascript:void(0)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>              <span>پکیچ ها</span>
-            <i class="fa fa-angle-left  pull-right"></i>
-        </a>
+        <li class="active">
+          <a class="sidebar-header active" href="javascript:void(0)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg> <span>کارمندان</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
 
-        <ul class="sidebar-submenu">
-            <li>
-                <a href="{% url 'packages:package-admin-list' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>لیست پکیچ ها</span>
-                </a>
-            </li>
-            <li>
-              <a href="{% url 'packages:package-create' %}">
+          <ul class="sidebar-submenu">
+            {% if request.user|has_perm:'employee_list' %}
+              <li>
+                <a href="{% url 'employee-list' %}">
                   <i class="fa fa-circle"></i>
-                  <span>افزودن پکیچ</span>
-              </a>
-          </li>
-        </ul>
-    </li>
+                  <span>لیست کارمند ها</span>
+                </a>
+              </li>
+            {% endif %}
+            {% if request.user|has_perm:'employee_create,employee_edit,employee_delete' %}
+              <li>
+                <a href="{% url 'employee-create' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن کارمند</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </li>
       {% endif %}
 
-        {% if request.user|has_perm:'employee_list,employee_create,employee_edit,employee_delete' %}
+      {% if request.user|has_perm:'working_hours_list,working_hours_create,working_hours_edit,working_hours_delete' %}
         <li class="active">
           <a class="sidebar-header active" href="javascript:void(0)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>              <span>کارمندان</span>
-              <i class="fa fa-angle-left  pull-right"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="4"></circle>
+              <line x1="21.17" y1="8" x2="12" y2="8"></line>
+              <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+              <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+            </svg> <span>ساعات کاری</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
 
           <ul class="sidebar-submenu">
+            {% if request.user|has_perm:'working_hours_list' %}
               <li>
-                  <a href="{% url 'employee-list' %}">
-                      <i class="fa fa-circle"></i>
-                      <span>لیست کارمند ها</span>
-                  </a>
+                <a href="{% url 'employee-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست ساعت کاری</span>
+                </a>
               </li>
+            {% endif %}
+            {% if request.user|has_perm:'working_hours_create,working_hours_edit,working_hours_delete' %}
               <li>
                 <a href="{% url 'employee-create' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>افزودن کارمند</span>
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن ساعت جدید</span>
                 </a>
-            </li>
+              </li>
+            {% endif %}
           </ul>
-      </li>
-        {% endif %}
+        </li>
+      {% endif %}
 
-        {% if request.user|has_perm:'employee_list,employee_create,employee_edit,employee_delete' %}
+      {% if request.user|has_perm:'business_list,business_create,business_edit,business_delete,service_list,get_available_list,get_available_create,get_available_edit,get_available_delete,service_create,service_edit,service_delete' %}
         <li class="active">
           <a class="sidebar-header active" href="javascript:void(0)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" y1="8" x2="12" y2="8"></line><line x1="3.95" y1="6.06" x2="8.54" y2="14"></line><line x1="10.88" y1="21.94" x2="15.46" y2="14"></line></svg>              <span>ساعات کاری</span>
-              <i class="fa fa-angle-left  pull-right"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <span>مجموعه</span>
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
 
           <ul class="sidebar-submenu">
+            {% if request.user|has_perm:'business_list' %}
               <li>
-                  <a href="{% url 'employee-list' %}">
-                      <i class="fa fa-circle"></i>
-                      <span>لیست ساعت کاری</span>
-                  </a>
-              </li>
-              <li>
-                <a href="{% url 'employee-create' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>افزودن ساعت جدید</span>
+                <a href="{% url 'business-list' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>لیست کسب و کار</span>
                 </a>
-            </li>
-          </ul>
-      </li>
-        {% endif %}
-
-        {% if request.user|has_perm:'service_list,service_create,service_edit,service_delete' %}
-        <li class="active">
-          <a class="sidebar-header active" href="javascript:void(0)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-              <span>مجموعه</span>
-              <i class="fa fa-angle-left  pull-right"></i>
-          </a>
-
-          <ul class="sidebar-submenu">
-              <li>
-                  <a href="{% url 'business-list' %}">
-                      <i class="fa fa-circle"></i>
-                      <span>لیست کسب و کار</span>
-                  </a>
               </li>
+            {% endif %}
+
+            {% if request.user|has_perm:'business_create,business_edit,business_delete' %}
               <li>
                 <a href="{% url 'business-create' %}">
-                    <i class="fa fa-circle"></i>
-                    <span>افزودن کسب و کار</span>
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن کسب و کار</span>
                 </a>
-            </li>
-
-            <li>
-              <a href="{% url 'service-list' %}">
+              </li>
+            {% endif %}
+            {% if request.user|has_perm:'service_list' %}
+              <li>
+                <a href="{% url 'service-list' %}">
                   <i class="fa fa-circle"></i>
                   <span>لیست سرویس</span>
-              </a>
-          </li>
-          <li>
-            <a href="{% url 'service-create' %}">
-                <i class="fa fa-circle"></i>
-                <span>افزودن سرویس</span>
-            </a>
-        </li>
+                </a>
+              </li>
+            {% endif %}
 
-            <li>
-              <a href="{% url 'get-available-admin-list' %}">
+            {% if request.user|has_perm:'service_create,service_edit,service_delete' %}
+              <li>
+                <a href="{% url 'service-create' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن سرویس</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if request.user|has_perm:'get_available_list' %}
+              <li>
+                <a href="{% url 'get-available-admin-list' %}">
                   <i class="fa fa-circle"></i>
                   <span>لیست ساعت‌های در دسترس</span>
-              </a>
-          </li>
+                </a>
+              </li>
+            {% endif %}
 
-          <li>
-            <a href="{% url 'get-available-admin-create' %}">
-                <i class="fa fa-circle"></i>
-                <span>افزودن ساعت‌های در دسترس</span>
-            </a>
-        </li>
-
+            {% if request.user|has_perm:'get_available_create,get_available_edit,get_available_delete' %}
+              <li>
+                <a href="{% url 'get-available-admin-create' %}">
+                  <i class="fa fa-circle"></i>
+                  <span>افزودن ساعت‌های در دسترس</span>
+                </a>
+              </li>
+            {% endif %}
           </ul>
-      </li>
+        </li>
       {% endif %}
+
       {% if request.user|has_perm:'wallet_list,wallet_create,wallet_edit,wallet_delete' %}
         <li>
           <a class="sidebar-header" href="javascript:void(0)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
-              <span>کیف پول من</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            </svg>
+            <span>کیف پول من</span>
           </a>
-      </li>
+        </li>
       {% endif %}
       <li>
         <a class="sidebar-header" href="{% url 'logout' %}">

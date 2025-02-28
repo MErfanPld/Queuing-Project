@@ -135,6 +135,37 @@ SERVICE_PERMISSIONS = {
 }
 PERMISSIONS.append(SERVICE_PERMISSIONS)
 
+######################################################################
+BUSINESS_PERMISSIONS = {
+    'title': 'دسترسی کسب و کار ها',
+    'permissions': [
+        {'name': 'لیست کسب و کار ها', 'code': 'business_list',
+            'description': 'دسترسی لیست کسب و کار ها'},
+        {'name': 'افزودن کسب و کار ها', 'code': 'business_create',
+         'description': 'دسترسی ساخت کسب و کار ها جدید'},
+        {'name': 'ویرایش کسب و کار ها', 'code': 'business_edit',
+            'description': 'دسترسی ویرایش کسب و کار ها'},
+        {'name': 'حذف کسب و کار ها', 'code': 'business_delete',
+            'description': 'دسترسی حذف کسب و کار ها'},
+    ]
+}
+PERMISSIONS.append(BUSINESS_PERMISSIONS)
+
+######################################################################
+GET_AVAILABLE_PERMISSIONS = {
+    'title': 'دسترسی ساعت‌های در دسترس ها',
+    'permissions': [
+        {'name': 'لیست ساعت‌های در دسترس ها', 'code': 'get_available_list',
+            'description': 'دسترسی لیست ساعت‌های در دسترس ها'},
+        {'name': 'افزودن ساعت‌های در دسترس ها', 'code': 'get_available_create',
+         'description': 'دسترسی ساخت ساعت‌های در دسترس ها جدید'},
+        {'name': 'ویرایش ساعت‌های در دسترس ها', 'code': 'get_available_edit',
+            'description': 'دسترسی ویرایش ساعت‌های در دسترس ها'},
+        {'name': 'حذف ساعت‌های در دسترس ها', 'code': 'get_available_delete',
+            'description': 'دسترسی حذف ساعت‌های در دسترس ها'},
+    ]
+}
+PERMISSIONS.append(GET_AVAILABLE_PERMISSIONS)
 
 ######################################################################
 WORKINGHOURS_PERMISSIONS = {
@@ -168,6 +199,7 @@ PACKAGE_PERMISSIONS = {
     ]
 }
 PERMISSIONS.append(PACKAGE_PERMISSIONS)
+
 
 ######################################################################
 
