@@ -82,9 +82,15 @@ class CreateWalletView(LoginRequiredMixin, CreateView):
             messages.error(self.request, "شما قبلاً کیف پول دارید.")
             return redirect('create_wallet')
         form.instance.user = self.request.user
+        wallet = form.save()
+        wallet.save()
         messages.success(self.request, "کیف پول شما با موفقیت شارژ شد.")
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['wallet'] = Wallet.objects.get(user=self.request.user)
+            return context
 
 class AddFundsView(LoginRequiredMixin, FormView):
     form_class = AddFundsForm

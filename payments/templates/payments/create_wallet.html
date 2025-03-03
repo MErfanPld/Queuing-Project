@@ -7,7 +7,6 @@
 
 {% block content %}
 
-
 <div class="page-body">
     <div class="container-fluid">
       <div class="page-header">
@@ -30,9 +29,13 @@
                 <li class="nav-item">
                   <a class="nav-link active show" id="account-tab" data-bs-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true" data-original-title="" title="">شارژ کیف پول</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link active show" id="account-tab" data-bs-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true" data-original-title="" title="">موجودی شما : {{ wallet.balance }} تومان</a>
+                </li>
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-tab">
+
                   <form id="frm" class="needs-validation user-add" method="post">
                     {% csrf_token %}
                     <div class="alert alert-warning" role="alert">مبلغ شارژ به تومان می باشد و لطفا دقت کنید مبلغ پرداختی به هیچ عنوان امکان استرداد ندارد .</div>
