@@ -160,6 +160,18 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+from django.contrib.messages import constants as messages
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
 # LOGGING = {
 #     'version': 1,
 #     'disable_existing_loggers': False,

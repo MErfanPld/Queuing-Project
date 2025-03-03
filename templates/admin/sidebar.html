@@ -275,7 +275,6 @@
         </li>
       {% endif %}
 
-      {% if request.user|has_perm:'wallet_list,wallet_create,wallet_edit,wallet_delete' %}
         <li>
           <a class="sidebar-header" href="javascript:void(0)">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
@@ -285,7 +284,6 @@
             <span>کیف پول من</span>
           </a>
         </li>
-      {% endif %}
       <li>
         <a class="sidebar-header" href="{% url 'logout' %}">
           <i data-feather="log-out"></i>

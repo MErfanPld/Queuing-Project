@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views import View
+from django.contrib import messages
 from django.views.generic import CreateView
 from django.shortcuts import redirect, render
 from django.views.generic.edit import FormView
@@ -10,7 +11,6 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Wallet, Transaction
-from django.contrib import messages
 from decimal import Decimal
 
 
@@ -75,17 +75,14 @@ class CreateWalletView(LoginRequiredMixin, CreateView):
     model = Wallet
     form_class = WalletForm
     template_name = 'payments/create_wallet.html'
-    success_url = reverse_lazy('wallet_success')
+    success_url = reverse_lazy('create_wallet')
 
     def form_valid(self, form):
-        # بررسی وجود کیف پول برای کاربر جاری
         if Wallet.objects.filter(user=self.request.user).exists():
             messages.error(self.request, "شما قبلاً کیف پول دارید.")
-            # یا صفحه‌ای دیگر برای نمایش پیام خطا
-            return redirect('wallet_success')
-
-        # تنظیم user به کاربر جاری
+            return redirect('create_wallet')
         form.instance.user = self.request.user
+        messages.success(self.request, "کیف پول شما با موفقیت شارژ شد.")
         return super().form_valid(form)
 
 

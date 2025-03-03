@@ -1,105 +1,99 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    ثبت رزرو
+  ثبت رزرو
 {% endblock %}
 
 {% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
+  <div class="title1 section-t-space">
+    <h2 class="title-inner1">ثبت رزرو</h2>
+  </div>
+  <section class="section-b-space pt-0 ratio_asos">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <form class="theme-form" method="post" action="">
+            {% csrf_token %}
+            <div class="form-row row">
+              <!-- انتخاب سرویس -->
+              <div class="col-sm-6">{{ form.service|as_crispy_field }}</div>
 
-    <div class="title1 section-t-space">
-        <h2 class="title-inner1">ثبت رزرو</h2>
-    </div>
-    <section class="section-b-space pt-0 ratio_asos">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="theme-form" method="post" action="">
-                        {% csrf_token %}
-                        <div class="form-row row">
-                            <!-- انتخاب سرویس -->
-                            <div class="col-sm-6">
-                                {{ form.service|as_crispy_field }}
-                            </div>
+              <!-- انتخاب تاریخ -->
+              <div class="col-sm-6">
+                <div class="datepicker-wrapper">{{ form.date|as_crispy_field }}</div>
+              </div>
 
-                            <!-- انتخاب تاریخ -->
-                            <div class="col-sm-6">
-                                <div class="datepicker-wrapper">
-                                    {{ form.date|as_crispy_field }}
-                                </div>
-                            </div>
+              <!-- انتخاب ساعت (دینامیک) -->
+              <div class="col-sm-6">
+                <label for="id_time">ساعت رزرو:</label>
+                <select id="id_time" name="time" class="form-control">
+                  <option value="">لطفا تاریخ را انتخاب کنید</option>
+                </select>
+              </div>
 
-                            <!-- انتخاب ساعت (دینامیک) -->
-                            <div class="col-sm-6">
-                                <label for="id_time">ساعت رزرو:</label>
-                                <select id="id_time" name="time" class="form-control">
-                                    <option value="">لطفا تاریخ را انتخاب کنید</option>
-                                </select>
-                            </div>
-
-                            <!-- دکمه ارسال -->
-                            <div class="col-md-12">
-                                <button class="btn btn-sm btn-solid" type="submit">ارسال رزرو</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+              <!-- دکمه ارسال -->
+              <div class="col-md-12" style="margin-left: 5px; margin-top: 6px">
+                <button class="btn btn-sm btn-solid" type="submit">ارسال رزرو</button>
+              </div>
             </div>
+          </form>
         </div>
-    </section>
-
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
 {% block js %}
-<script>
+  <script>
     kamaDatepicker('id_date', {
-        placeholder: "تاریخ را انتخاب کنید",
-        nextButtonIcon: "fa fa-arrow-circle-right",
-        previousButtonIcon: "fa fa-arrow-circle-left",
-        buttonsColor: "orange",
-        markToday: true,
-        markHolidays: true,
-        highlightSelectedDay: true,
-        sync: true,
-        gotoToday: true
-    });
-
-    $("#id_date").attr('autocomplete', 'off');
-
+      placeholder: 'تاریخ را انتخاب کنید',
+      nextButtonIcon: 'fa fa-arrow-circle-right',
+      previousButtonIcon: 'fa fa-arrow-circle-left',
+      buttonsColor: 'orange',
+      markToday: true,
+      markHolidays: true,
+      highlightSelectedDay: true,
+      sync: true,
+      gotoToday: true
+    })
+    
+    $('#id_date').attr('autocomplete', 'off')
+    
     $('#id_date').on('change', function () {
-        $('#id_date').val($('#id_date').val().replaceAll('/', '-'));
-        loadAvailableTimes();
-    });
-
+      $('#id_date').val($('#id_date').val().replaceAll('/', '-'))
+      loadAvailableTimes()
+    })
+    
     $('#id_service').on('change', function () {
-        loadAvailableTimes();
-    });
-
+      loadAvailableTimes()
+    })
+    
     function loadAvailableTimes() {
-        var date = $('#id_date').val();
-        var serviceId = $('#id_service').val();
-
-        if (date && serviceId) {
-            $.ajax({
-                url: "{% url 'get_available_times' %}",
-                data: {
-                    'service_id': serviceId,
-                    'date': date
-                },
-                success: function (data) {
-                    $('#id_time').empty();
-                    if (data.times.length > 0) {
-                        data.times.forEach(function (time) {
-                            $('#id_time').append('<option value="' + time + '">' + time + '</option>');
-                        });
-                    } else {
-                        $('#id_time').append('<option value="">زمانی یافت نشد</option>');
-                    }
-                }
-            });
-        }
+      var date = $('#id_date').val()
+      var serviceId = $('#id_service').val()
+    
+      if (date && serviceId) {
+        $.ajax({
+          url: "{% url 'get_available_times' %}",
+          data: {
+            service_id: serviceId,
+            date: date
+          },
+          success: function (data) {
+            $('#id_time').empty()
+            if (data.times.length > 0) {
+              data.times.forEach(function (time) {
+                $('#id_time').append('<option value="' + time + '">' + time + '</option>')
+              })
+            } else {
+              $('#id_time').append('<option value="">زمانی یافت نشد</option>')
+            }
+          }
+        })
+      }
     }
-</script>
+  </script>
 {% endblock %}
