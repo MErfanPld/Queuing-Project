@@ -38,7 +38,6 @@ class TransactionReportView(ListView):
         elif date_filter == 'past':
             queryset = queryset.filter(
                 created_at__date__lt=today - timedelta(days=1))
-
         return queryset
 
 

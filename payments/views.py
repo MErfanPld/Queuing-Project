@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views.generic import CreateView
 from django.shortcuts import redirect, render
 from django.views.generic.edit import FormView
-from payments.forms import WalletForm,AddFundsForm
+from payments.forms import WalletForm, AddFundsForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from reservations.models import Appointment, Service
 from django.views.generic import TemplateView
@@ -47,7 +47,8 @@ class PaymentView(View):
         appointment.save()
 
         # هدایت به صفحه تأیید پرداخت یا صفحه اصلی
-        messages.success(request, 'رزرو شما در انتظار تایید هست. بعد از تایید ارایشگر به شما پیامک میشود')
+        messages.success(
+            request, 'رزرو شما در انتظار تایید هست. بعد از تایید ارایشگر به شما پیامک میشود')
         return redirect('home')
 
 
@@ -88,9 +89,10 @@ class CreateWalletView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['wallet'] = Wallet.objects.get(user=self.request.user)
-            return context
+        context = super().get_context_data(**kwargs)
+        context['wallet'] = Wallet.objects.get(user=self.request.user)
+        return context
+
 
 class AddFundsView(LoginRequiredMixin, FormView):
     form_class = AddFundsForm
